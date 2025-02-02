@@ -7,18 +7,38 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.DriveCommands;
+import frc.robot.subsystems.swerve.DriveConstants;
+import frc.robot.subsystems.swerve.DriveSubsystem;
+import frc.robot.subsystems.swerve.GyroIOPigeon2;
+import frc.robot.subsystems.swerve.module.ModuleIOSparkMax;
 
 
 public class RobotContainer
 {
+    private final CommandXboxController driveController = new CommandXboxController(0);
+    DriveSubsystem driveSubsystem;
     public RobotContainer()
     {
+        driveSubsystem = new DriveSubsystem(
+            new GyroIOPigeon2(),
+            new ModuleIOSparkMax(DriveConstants.MODULE_CONSTANTS[0]),
+            new ModuleIOSparkMax(DriveConstants.MODULE_CONSTANTS[1]),
+            new ModuleIOSparkMax(DriveConstants.MODULE_CONSTANTS[2]),
+            new ModuleIOSparkMax(DriveConstants.MODULE_CONSTANTS[3])
+        );
         configureBindings();
     }
     
-    
-    private void configureBindings() {}
+    private void configureBindings() {
+        driveSubsystem.setDefaultCommand(DriveCommands.joystickDrive(
+            driveSubsystem,
+            () -> -driveController.getLeftY(),
+            () -> -driveController.getLeftX(),
+            () -> -driveController.getRightX()
+        ));
+    }
     
     
     public Command getAutonomousCommand()

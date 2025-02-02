@@ -1,4 +1,4 @@
-package frc.robot.subsystems.drive.module;
+package frc.robot.subsystems.swerve.module;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
