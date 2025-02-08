@@ -28,7 +28,7 @@ public class DriveConstants {
   public static final double MAX_ANGULAR_SPEED = MAX_LINEAR_SPEED_MPS / DRIVE_BASE_RADIUS;
 
   public static final double WHEEL_RADIUS_METERS = Units.inchesToMeters(2.0);
-  public static final double DRIVE_GEAR_RATIO = (50.0 / 14.0) * (19.0 / 25.0) * (45.0 / 15.0);
+  public static final double DRIVE_GEAR_RATIO = (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0);
   public static final double STEER_GEAR_RATIO = (50.0 / 14.0) * (60.0 / 10.0);
 
   // Pathplanner stuff
@@ -60,7 +60,7 @@ public class DriveConstants {
                 .driveId(3)
                 .steerId(4)
                 .encoderId(5)
-                .encoderOffset(Rotation2d.fromDegrees(172.44).unaryMinus())
+                .encoderOffset(Rotation2d.fromDegrees(-135).plus(Rotation2d.fromRotations(0.272705)))
                 .steerInverted(true)
                 .turnInverted(false)
                 .build(),
@@ -69,7 +69,7 @@ public class DriveConstants {
                 .driveId(6)
                 .steerId(7)
                 .encoderId(8)
-                .encoderOffset(Rotation2d.fromDegrees(-101.60).unaryMinus().plus(Rotation2d.k180deg))
+                .encoderOffset(Rotation2d.fromDegrees(90).plus(Rotation2d.fromRotations(-0.152344-0.061279)))
                 .steerInverted(true)
                 .turnInverted(false)
                 .build(),
@@ -78,16 +78,16 @@ public class DriveConstants {
                 .driveId(12)
                 .steerId(13)
                 .encoderId(14)
-                .encoderOffset(Rotation2d.fromDegrees(-4.57).unaryMinus())
+                .encoderOffset(Rotation2d.fromDegrees(-90).plus(Rotation2d.fromRotations(-0.173096)))
                 .steerInverted(true)
                 .turnInverted(false)
                 .build(),
             // Back Right
             ModuleConstants.builder()
-                .driveId(11)
+                .driveId(9)
                 .steerId(10)
-                .encoderId(12)
-                .encoderOffset(Rotation2d.fromDegrees(60.20).unaryMinus().plus(Rotation2d.k180deg))
+                .encoderId(11)
+                .encoderOffset(Rotation2d.fromDegrees(90).plus(Rotation2d.fromRotations(0.375244)))
                 .steerInverted(true)
                 .turnInverted(false)
                 .build()

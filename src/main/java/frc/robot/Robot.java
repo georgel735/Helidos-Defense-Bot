@@ -5,6 +5,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,7 +17,7 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 public class Robot extends LoggedRobot
 {
     private Command autonomousCommand;
-    
+    private DigitalOutput timer;
     private RobotContainer robotContainer;
 
     public Robot() {
@@ -32,6 +33,7 @@ public class Robot extends LoggedRobot
         Logger.start();
 
         robotContainer = new RobotContainer();
+        timer = new DigitalOutput(0);
     }
     
     
@@ -43,19 +45,26 @@ public class Robot extends LoggedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
+
     }
     
     
     @Override
-    public void disabledInit() {}
+    public void disabledInit() {
+        timer.set(false);
+    }
     
     
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+        timer.set(false);
+    }
     
     
     @Override
-    public void disabledExit() {}
+    public void disabledExit() {
+        timer.set(true);
+    }
     
     
     @Override
@@ -67,11 +76,14 @@ public class Robot extends LoggedRobot
         {
             autonomousCommand.schedule();
         }
+        timer.set(true);
     }
     
     
     @Override
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+        timer.set(true);
+    }
     
     
     @Override
@@ -85,11 +97,14 @@ public class Robot extends LoggedRobot
         {
             autonomousCommand.cancel();
         }
+        timer.set(true);
     }
     
     
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+        timer.set(true);
+    }
     
     
     @Override
