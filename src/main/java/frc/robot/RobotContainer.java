@@ -5,6 +5,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -18,6 +19,7 @@ import frc.robot.subsystems.swerve.module.ModuleIOSparkMax;
 public class RobotContainer
 {
     private final CommandXboxController driveController = new CommandXboxController(0);
+    private final SlewRateLimiter filter = new SlewRateLimiter(0.45);
     DriveSubsystem driveSubsystem;
     public RobotContainer()
     {
@@ -34,8 +36,8 @@ public class RobotContainer
     private void configureBindings() {
         driveSubsystem.setDefaultCommand(DriveCommands.joystickDrive(
             driveSubsystem,
-            () -> -driveController.getLeftY(),
-            () -> -driveController.getLeftX(),
+            () -> filter.calculate(-driveController.getLeftY()),
+            () -> filter.calculate(-driveController.getLeftX()),
             () -> -driveController.getRightX()
         ));
     }
